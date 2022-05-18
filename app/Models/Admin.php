@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subcategory extends Model
+class Admin extends Model
 {
     use HasFactory;
 
-    protected $table = 'subcategory';
+    protected $table = 'admins';
 
     protected $guarded = [];
-
-    public function attributes()
-    {
-        return $this->hasMany(Attribute::class);
-    }
 }

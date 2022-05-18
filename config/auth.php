@@ -17,7 +17,18 @@ return [
         'guard' => 'api',
         'passwords' => 'users',
     ],
-
+    // 'users' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\User::class,
+    // ],
+    // 'admins' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\Admin::class,
+    // ],
+    // 'sellers' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\Seller::class,
+    // ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -39,6 +50,14 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
+        ],
+        'admins' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
+        ],
+        'sellers' => [
+            'driver' => 'jwt',
+            'provider' => 'sellers',
         ],
     ],
 
@@ -64,7 +83,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Seller::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -93,6 +119,14 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        // 'admins' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Admin::class,
+        // ],
+        // 'sellers' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Seller::class,
+        // ],
     ],
 
     /*

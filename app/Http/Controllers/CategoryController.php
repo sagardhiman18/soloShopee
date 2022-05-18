@@ -10,6 +10,12 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admins');
+    // }
+
     public function createCategory(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -81,9 +87,13 @@ class CategoryController extends Controller
 
         $allCategoryData = Category::where('guid',  $request->input('id'))->first();
 
-        // dd($allCategoryData);
-        // $id = Contents::find($id);
-        $allCategoryData->softDeletes();
+        if ($allCategoryData == null) {
+            return response()->json([
+                'message' => "Invalid Category ID",
+                'status' => '404',
+            ], 404);   
+        }  
+        $allCategoryData->delete();
 
         return response()->json([
             'data' => "Category Deleted Successfully",
@@ -117,15 +127,14 @@ class CategoryController extends Controller
         
         $tempVar['guid'] = $request->input('guid');
         $tempVar['name'] = $request->input('name');
-        
+
         $categoryData->update($tempVar);
-        
+
         return response()->json([
             'data' =>  $categoryData,
             'message' => 'Category updated successfully',
             'status' => '200',
         ], 200);
     }
-
 
 }

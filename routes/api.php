@@ -5,6 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\VarianceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\CartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,32 +29,59 @@ use App\Http\Controllers\SubcategoryController;
 
 
 Route::group([
-
-    'middleware' => 'api',
+ 
     'prefix' => 'auth'
-
-], function ($router) {
+], function () {
 
     Route::post('login', [AdminController::class, 'login']);
     Route::post('logout', [AdminController::class, 'show']);
     Route::post('refresh', [AdminController::class, 'show']);
     Route::post('me', [AdminController::class, 'show']);
+    
+    Route::group([
+        'middleware' => 'api'
+    ], function() {
+        Route::post('createCategory', [CategoryController::class, 'createCategory']);
+        Route::get('showallCategory', [CategoryController::class, 'showallCategory']);
+        Route::post('showCategoryById', [CategoryController::class, 'showCategoryById']);
+        Route::patch('editCategory', [CategoryController::class, 'editCategory']);
+        Route::post('deleteCategory', [CategoryController::class, 'deleteCategory']);
+
+        Route::post('createSubCategory', [SubcategoryController::class, 'createSubCategory']);
+        Route::get('showallSubCategory', [SubcategoryController::class, 'showallSubCategory']);
+        Route::post('showSubCategoryById', [SubcategoryController::class, 'showSubCategoryById']);
+        Route::patch('editsubCategory', [SubcategoryController::class, 'editsubCategory']);
+        Route::post('deleteSubCategory', [SubcategoryController::class, 'deleteSubCategory']);
 
 
-    Route::post('createCategory', [CategoryController::class, 'createCategory']);
-    Route::get('showallCategory', [CategoryController::class, 'showallCategory']);
-    Route::post('showCategoryById', [CategoryController::class, 'showCategoryById']);
-    Route::patch('editCategory', [CategoryController::class, 'editCategory']);
-    // Route::post('deleteCategory', [CategoryController::class, 'deleteCategory']);
+        Route::post('createProduct', [ProductController::class, 'createProduct']);
+        Route::get('showallProduct', [ProductController::class, 'showallProduct']);
+        Route::get('showallDeactiveProduct', [ProductController::class, 'showallDeactiveProduct']);
+        Route::post('showProductById', [ProductController::class, 'showProductById']);
+        Route::patch('editProduct', [ProductController::class, 'editProduct']);
+        Route::post('deleteProduct', [ProductController::class, 'deleteProduct']);
+        Route::post('deleteMultipleProducts', [ProductController::class, 'deleteMultipleProducts']);
+        Route::post('uplodImagesTogallery', [ProductController::class, 'uplodImagesTogallery']);
+        Route::get('getImagesFromgallery', [ProductController::class, 'getImagesFromgallery']);
+        Route::post('activatedeactivateProduct', [ProductController::class, 'activatedeactivateProduct']);
+        Route::post('showProductsByAdmin', [ProductController::class, 'showProductsByAdmin']);
+        Route::get('showProductstoUsers', [ProductController::class, 'showProductstoUsers']);
+        Route::get('showProductstoAdmin', [ProductController::class, 'showProductstoAdmin']);
 
-    Route::post('createSubCategory', [SubcategoryController::class, 'createSubCategory']);
-    Route::get('showallSubCategory', [SubcategoryController::class, 'showallSubCategory']);
-    Route::post('showSubCategoryById', [SubcategoryController::class, 'showSubCategoryById']);
-    Route::patch('editsubCategory', [CategoryController::class, 'editsubCategory']);
 
-    Route::post('createProduct', [CategoryController::class, 'createProduct']);
-    Route::get('showallProduct', [CategoryController::class, 'showallProduct']);
-    Route::post('showProductById', [CategoryController::class, 'showProductById']);
-    Route::patch('editProduct', [CategoryController::class, 'editProduct']);
+        Route::post('createAttribute', [AttributeController::class, 'createAttribute']);
+        Route::post('editAttribute', [AttributeController::class, 'editAttribute']);
+        Route::post('deleteAttribute', [AttributeController::class, 'deleteAttribute']);
+        // Route::post('editAttribute', [AttributeController::class, 'editAttribute']);
 
+        Route::post('createVariance', [VarianceController::class, 'createVariance']);
+        Route::post('editVariance', [VarianceController::class, 'editVariance']);
+        Route::post('deleteVariance', [VarianceController::class, 'deleteVariance']);
+
+
+
+        Route::post('addToCart', [CartController::class, 'addToCart']);
+
+
+    });
 });

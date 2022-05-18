@@ -12,4 +12,13 @@ class Product extends Model
 
     protected $guarded = [];
 
+    public function images()
+    {
+        return $this->hasMany(Images::class);
+    }
+
+    public function productvariant()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
 }

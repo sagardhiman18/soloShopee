@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admins', ['except' => ['login']]);
+    // }
+    
     public function login()
     {
         $credentials = request(['email', 'password']);
